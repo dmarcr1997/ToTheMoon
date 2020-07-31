@@ -7,23 +7,30 @@ import './App.css';
 
 class App extends React.Component{
   state = {
-    fuel: 0
+    fuel: 0,
+    new: false
   }
 
   addFuel = (f) => {
     this.setState({
-      fuel: f
+      fuel: f,
+      new: true
     })
-    let st = state
-    debugger
+  }
+
+  renderRocket = () => {
+    if (this.state.new === true)
+      return(<Rocket fuel={this.state.fuel}/>)
+    else
+      return
   }
   render(){
     return(
       <>
         <img src={world} className='earth' alt='earth'/>
-          <Rocket/>
+          {this.renderRocket()}
           <img src={fullmoon} className='moon' alt='moon'/>
-          <Form/>
+          <Form add={this.addFuel}/>
       </>
     )
   }

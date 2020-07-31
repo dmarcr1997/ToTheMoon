@@ -6,13 +6,21 @@ class Rocket extends Component{
     state = {
         fuel: this.props.fuel,
         speed: 0,
-        start: false
+        start: false,
+        mass: 10000,
+        c: 3000,
+        g: 9.81,
     }
-
+    componentDidMount(){
+        this.setState({
+            speed: this.getSpeed()
+        })
+    }
     getSpeed = () => {
-        if (this.state.fuel <= 0) {
-            return 0
-        } else return 
+        let mass = this.state.mass
+        let massNot = this.state.fuel + mass
+        let speed  = Math.log((massNot/mass))
+        console.log(speed) 
     }
     getWidth = () => {
         return '5%'

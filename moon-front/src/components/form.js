@@ -5,8 +5,9 @@ class Form extends Component{
         fuel: 0,
     }
     handleSub = (event) =>{
-        let st = this.state
-        debugger
+        event.preventDefault()
+        this.props.add(this.state.fuel)
+        this.setState({fuel:0})
     }
     handleChange = event => {
         this.setState({fuel: event.target.value})
