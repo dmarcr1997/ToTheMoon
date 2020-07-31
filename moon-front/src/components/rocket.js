@@ -1,24 +1,29 @@
 import React, {Component} from 'react';
-
-import spaceship from '../spaceship.svg';
+import Ship from './ship';
 
 class Rocket extends Component{
     state = {
+        dashes: [],
         fuel: this.props.fuel,
         speed: 0,
         start: false,
         mass: 10000,
         c: 3000,
         g: 9.81,
-        dist: 0,
+        ydist: 0,
+        xdist: 0,
         q: 10,
-        t: 0
-
+        t: 0,
+        x: 50,
+        y: 28,
+        fullDist: (238,9000 * Math.pow(10, -3)), 
+        degree: 120
     }
     componentDidMount(){
         this.setState({
             speed: this.getSpeed(),
-            dist: this.getDistance(),
+            ydist: this.getYDistance(),
+            xdist: this.getXDistance(),
             time: this.getTime(),
         })
     }
@@ -26,55 +31,70 @@ class Rocket extends Component{
     getTime = () => {
         let {mass, q, c, fuel} = this.state
         let speed = this.getSpeed()
-        let time = (((mass+fuel)/mass)/q)*(1-(1/Math.exp(speed/c)))
+        let time = (((mass+fuel)/mass)/q)*(1-(1/Math.exp(speed/c))) 
         console.log(time)
         return time
     }
 
-    getDistance = () => {
+    getYDistance = () => {
         let dist = (.5) * Math.pow(this.getSpeed(), 2) * this.state.g
         console.log(dist)
         return dist
     }
 
+    getXDistance = () => {
+        return (.5 * Math.cos(25) * this.getTime())
+    }
+
     getSpeed = () => {
         let mass = this.state.mass
         let massNot = this.state.fuel + mass
-        let speed  = Math.log((massNot/mass))
+        let speed  = Math.log((massNot/mass))* Math.pow(10, -3)
         console.log(speed)
         return speed 
     }
-    getWidth = () => {
-        return '5%'
+
+    launch = () => {
+        let st = this.state.start
+        this.setState({
+            start:!st
+        })
     }
 
-    getHeight = () => {
-        return '5%'
+    changeX = (newX) => {
+        this.setState({
+            x: newX
+        })
     }
 
-    getX = () => {
-        return '50em'
+    
+    changeY = (newY) => {
+        this.setState({
+            y: newY
+        })
     }
 
-    getY = () => {
-        return '28em'
+    changeDeg = newDe => {
+        this.setState({
+            degree: newDe
+        })
     }
 
-    getAngle = () => {
-        return 'rotate(25deg)'
+    renderRocket = () => {
+        if (this.state.start === true){
+            return(<Ship changeDeg={this.changeDeg} changeY={this.changeY} changeX={this.changeX} x={this.state.x} y={this.state.y} disX={this.state.xdist} distY={this.state.ydist} speed={this.state.speed} degree={this.state.degree}/>)
+        }
+        return
     }
+
 
     render(){
-        const rocketStyle = {
-            position: 'absolute',
-            width: this.getWidth(),
-            height: this.getHeight(),
-            top: this.getY(),
-            left: this.getX(),
-            transform: this.getAngle()
-        };
+        
         return(
-            <img src={spaceship} style={rocketStyle} className='rocket' alt='ship'/>
+            <>
+                {this.renderRocket()} 
+                <button onClick={this.launch}>LiftOff</button>
+            </>
         )
     }
 }

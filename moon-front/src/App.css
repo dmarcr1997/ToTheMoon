@@ -6,16 +6,17 @@ body {
 }
 
 .earth {
-  margin-top: 10%;
+  float:left;
   width: 20%;
   height:20%;
-  top: 5em;
-  right: 0em;
+  right: 5em;
+  top: -2em;
   align-self: center;
   position: relative;
 }
 
 .moon {
+  margin-top: 40em;
   margin-left:10%;
   width: 10%;
   height: 10%;
@@ -29,7 +30,7 @@ body {
 }
 
 .form{
-  margin-top: 10em;
+  margin-top: 5em;
 }
 .form label{
   color: white;
