@@ -10,17 +10,39 @@ class Rocket extends Component{
         mass: 10000,
         c: 3000,
         g: 9.81,
+        dist: 0,
+        q: 10,
+        t: 0
+
     }
     componentDidMount(){
         this.setState({
-            speed: this.getSpeed()
+            speed: this.getSpeed(),
+            dist: this.getDistance(),
+            time: this.getTime(),
         })
     }
+
+    getTime = () => {
+        let {mass, q, c, fuel} = this.state
+        let speed = this.getSpeed()
+        let time = (((mass+fuel)/mass)/q)*(1-(1/Math.exp(speed/c)))
+        console.log(time)
+        return time
+    }
+
+    getDistance = () => {
+        let dist = (.5) * Math.pow(this.getSpeed(), 2) * this.state.g
+        console.log(dist)
+        return dist
+    }
+
     getSpeed = () => {
         let mass = this.state.mass
         let massNot = this.state.fuel + mass
         let speed  = Math.log((massNot/mass))
-        console.log(speed) 
+        console.log(speed)
+        return speed 
     }
     getWidth = () => {
         return '5%'
