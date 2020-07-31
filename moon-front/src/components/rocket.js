@@ -61,6 +61,9 @@ class Rocket extends Component{
         })
     }
 
+
+    //x 75-80
+    //y39-50
     changeX = (newX) => {
         this.setState({
             x: newX
@@ -80,9 +83,46 @@ class Rocket extends Component{
         })
     }
 
+    checkIfWon = () => {
+        let won = false
+        if ((this.state.x >= 75 && this.state.x <=80)&& (this.state.y >= 39 && this.state.y <= 50)){
+            won = true
+        } else {
+            won = false
+        }
+        if (won === true){
+            alert('You Landed')
+            this.setState({
+                start: false,
+                fuel: 0
+            })
+        }
+    }
+
+    checkIfLost = () => {
+        let lost = false
+        if (this.state.x < 0 || this.state.x > 100){
+            lost = true
+        }
+
+        if (this.state.y < 0 || this.state.y > 60){
+            lost = true
+        }
+
+        if (lost === true){
+            alert('You Did not Make it')
+            this.setState({
+                start: false,
+                fuel: 0
+            })
+        }
+    }
+    
+
+
     renderRocket = () => {
         if (this.state.start === true){
-            return(<Ship changeDeg={this.changeDeg} changeY={this.changeY} changeX={this.changeX} x={this.state.x} y={this.state.y} disX={this.state.xdist} distY={this.state.ydist} speed={this.state.speed} degree={this.state.degree}/>)
+            return(<Ship checkIfLost={this.checkIfLost} checkIfWon={this.checkIfWon} changeDeg={this.changeDeg} changeY={this.changeY} changeX={this.changeX} x={this.state.x} y={this.state.y} disX={this.state.xdist} distY={this.state.ydist} speed={this.state.speed} degree={this.state.degree}/>)
         }
         return
     }

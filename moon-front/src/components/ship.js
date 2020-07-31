@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import spaceship from '../spaceship.svg';
 const Ship = props => {
-    let [xPos=props.x, setXpos] = useState(5);
+    let [xPos, setXpos] = useState(5);
     let [YPos, setYpos] = useState(5);
-    let [Deg=120, setThetpos] = useState(120);
+    let [Deg, setThetpos] = useState(120);
     
     
 
@@ -41,21 +41,23 @@ const Ship = props => {
                 return xPos
             })
             setYpos((yPos) => {
+                let comeBack = false
+                if (yPos >= 73)
+                    comeBack = true
                 yPos += (props.speed*Math.sin(props.degree))
                 props.changeY(yPos)
                 console.log(`Y position: ${yPos}`)
                 return yPos
             })
             setThetpos((Deg, xPos, yPos) => { 
-                if (xPos >= 73 && yPos >= 54)
-                    Deg -= .01
-                else{
-                    Deg += .001
-                }
+                Deg += .001
+                Deg -= .002
                 console.log(`Degreee: ${Deg}`)
                 props.changeDeg(Deg)
                 return Deg
             })
+            props.checkIfWon()
+            props.checkIfLost()
         }, 1)
         return () => clearInterval(interval);
     }, []);
