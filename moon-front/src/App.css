@@ -1,5 +1,25 @@
-.App {
+body {
   text-align: center;
-  background-image: url('./spaceBck.jpg');
+  background-image: url('spaceBck.jpg');
+  background-repeat: no-repeat;
+  background-size: 100%;
 }
 
+.earth {
+  margin-top: 10%;
+  width: 20%;
+  height:20%;
+  top: 5em;
+  right: 0em;
+  align-self: center;
+  position: relative;
+}
+
+.moon {
+  margin-left:10%;
+  width: 10%;
+  height: 10%;
+}
+.rocket {
+  transform: rotate(90deg);
+}
