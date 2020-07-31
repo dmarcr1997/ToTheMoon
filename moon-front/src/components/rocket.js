@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
-import { Image } from 'react-canvas';
+
 import spaceship from '../spaceship.svg';
 
 class Rocket extends Component{
     state = {
         fuel: this.props.fuel,
-        speed: getSpeed(),
+        speed: 0,
         start: false
     }
 
@@ -23,23 +23,28 @@ class Rocket extends Component{
     }
 
     getX = () => {
-        return '100'
+        return '50em'
     }
 
     getY = () => {
-        return '30'
+        return '28em'
+    }
+
+    getAngle = () => {
+        return 'rotate(25deg)'
     }
 
     render(){
         const rocketStyle = {
-            position: 'relative',
+            position: 'absolute',
             width: this.getWidth(),
             height: this.getHeight(),
-            top: this.getX(),
-            left: this.getY(),
+            top: this.getY(),
+            left: this.getX(),
+            transform: this.getAngle()
         };
         return(
-            <Image src={spaceship} style={rocketStyle} className='rocket' alt='ship'/>
+            <img src={spaceship} style={rocketStyle} className='rocket' alt='ship'/>
         )
     }
 }

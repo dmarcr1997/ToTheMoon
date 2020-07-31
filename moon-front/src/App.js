@@ -1,22 +1,32 @@
 import React from 'react';
+import Form from './components/form';
 import world from './world.svg';
 import Rocket from './components/rocket';
 import fullmoon from './full-moon.svg';
-import { Surface, Image } from 'react-canvas';
 import './App.css';
 
-function App() {
-  let surfaceWidth = window.innerWidth;
-  let surfaceHeight = window.innerHeight;
-  return(
-    <>
-      <Surface width={surfaceWidth} height={surfaceHeight} left={0} top={0}>
-        <Image src={world} className='earth' alt='earth'/>
-        <Rocket/>
-        <Image src={fullmoon} className='moon' alt='moon'/>
-      </Surface>
-    </>
-  )
+class App extends React.Component{
+  state = {
+    fuel: 0
+  }
+
+  addFuel = (f) => {
+    this.setState({
+      fuel: f
+    })
+    let st = state
+    debugger
+  }
+  render(){
+    return(
+      <>
+        <img src={world} className='earth' alt='earth'/>
+          <Rocket/>
+          <img src={fullmoon} className='moon' alt='moon'/>
+          <Form/>
+      </>
+    )
+  }
 }
 
 export default App;

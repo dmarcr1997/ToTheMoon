@@ -20,6 +20,17 @@ body {
   width: 10%;
   height: 10%;
 }
-.rocket {
-  transform: rotate(90deg);
+
+
+.stage {
+  background-image: url('spaceBck.jpg');
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
+.form{
+  margin-top: 10em;
+}
+.form label{
+  color: white;
 }
