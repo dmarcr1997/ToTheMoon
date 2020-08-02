@@ -30,8 +30,21 @@ body {
 }
 
 .form{
-  margin-top: 5em;
+  margin-top: 2.5em;
 }
 .form label{
+  font-size: medium;
   color: white;
+}
+.form input{
+  padding: .2em;
+  border-radius: 10px;
+}
+
+.form .submit{
+  padding: .25em;
+  box-shadow: black 1px 1px 1px;
+  border: orangered solid 1px;
+  background-color: orangered;
+  color: whitesmoke;
 }
