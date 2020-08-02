@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
+import Asteroid from './asteroid';
 
 class Asteroids extends Component{
     state = {
-        asteroids = []
+        asteroids: []
     }
 
     saveAsteroids = (num) => {
@@ -12,10 +13,6 @@ class Asteroids extends Component{
             count++
             asteroids.push({
                 id: Date.now(),
-                speed: 5,
-                angle: 120,
-                x: 100 - (count+5),
-                y: 100 - (count+ 5),
             })
         }
         this.setState({
@@ -24,14 +21,17 @@ class Asteroids extends Component{
     }
 
     componentDidMount(){
-        this.saveAsteroids()
+        this.saveAsteroids(this.props.num)
     }
+
 
     render(){
         return(
-            <>
-                
-            </>
+            <div>
+                {this.state.asteroids.map(ast => <Asteroid id={ast.id}/>)}
+            </div>
         )
     }
 }
+
+export default Asteroids

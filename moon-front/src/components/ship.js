@@ -2,11 +2,11 @@ import React, { useEffect } from 'react';
 import spaceship from '../spaceship.png';
 const Ship = props => {
     function getWidth(){
-        return '5%'
+        return '3%'
     }
 
     function getHeight(){
-        return '5%'
+        return '3%'
     }
 
     const rocketStyle = {

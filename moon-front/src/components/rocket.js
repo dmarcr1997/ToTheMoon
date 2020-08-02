@@ -6,7 +6,6 @@ class Rocket extends Component{
         dashes: [],
         velX: .01,
         velY: .01,
-        start: false,
         speed: .01,
         rotateSpeed: 1,
         x: 5,
@@ -42,7 +41,7 @@ class Rocket extends Component{
             velX += speed
             velY += speed
             if (angle === 0){
-                x+=velX
+                x+= velX
             } else if (angle > 0 && angle < 90){
                 y+= velY
                 x+= velX
@@ -88,10 +87,9 @@ class Rocket extends Component{
         })
     }
 
-    
     checkIfWon = () => {
         let won = false
-        if ((this.state.x >= 75 && this.state.x <=80) && (this.state.y >= 39 && this.state.y <= 50)){
+        if ((this.state.x >= 73 && this.state.x <=80) && (this.state.y >= 39 && this.state.y <= 50)){
             won = true
         } else {
             won = false
@@ -114,7 +112,7 @@ class Rocket extends Component{
 
     checkIfLost = () => {
         let lost = false
-        if (this.state.x < 0 || this.state.x > 100){
+        if (this.state.x < 0 || this.state.x > 150){
             lost = true
         }
 
@@ -139,10 +137,7 @@ class Rocket extends Component{
     }
     
     renderRocket = () => {
-        if (this.state.start === true){
-            return(<Ship update={this.updateAirPos} checkIfLost={this.checkIfLost} checkIfWon={this.checkIfWon} x={this.state.x} y={this.state.y} angle={this.state.angle} velX={this.state.velX} velY={this.state.velY}/>)
-        }
-        return
+        return(<Ship setAngle={this.setAngle} update={this.updateAirPos} checkIfLost={this.checkIfLost} checkIfWon={this.checkIfWon} x={this.state.x} y={this.state.y} angle={this.state.angle} velX={this.state.velX} velY={this.state.velY}/>)
     }
 
     render(){
@@ -150,7 +145,6 @@ class Rocket extends Component{
         return(
             <div>
                 {this.renderRocket()} 
-                <button onClick={this.launch}>LiftOff</button>
             </div>
         )
     }
