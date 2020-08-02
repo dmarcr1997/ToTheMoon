@@ -11,12 +11,12 @@ class Rocket extends Component{
         rotateSpeed: 1,
         x: 5,
         y: 5, 
-        angle: 120,
+        angle: 0,
     }
     componentDidMount(){
         window.addEventListener('keypress', this.moveShip)
     }
-    
+
     launch = () => {
         let st = this.state.launch
         this.setState({
@@ -37,20 +37,44 @@ class Rocket extends Component{
         let {velX, velY, angle, x, y, speed, rotateSpeed} = this.state
         let key = event.key
         console.log(key)
-        let newAngle
         if (key === "w"){
             console.log(`X:${x} Y:${y} velx:${velX} velY:${velY}`)
-            let radians = angle - 180 
-            velX += Math.sin(angle)*speed
-            velY += Math.cos(angle)*speed
-            x += velX
-            y += velY
+            velX += speed
+            velY += speed
+            if (angle === 0){
+                x+=velX
+            } else if (angle > 0 && angle < 90){
+                y+= velY
+                x+= velX
+            } else if (angle > 90 && angle < 180){
+                y+=velY
+                x-=velX
+            } else if (angle === 90){
+                y+=velY
+            } else if (angle === 180){
+                x-=velX
+            } else if (angle > 180 && angle < 270){
+                y-=velY
+                x-=velX
+            } else if (angle === 270){
+                y -= velY
+            } else if (angle > 270 && angle < 360){
+                y-= velY
+                x+= velX
+            }
+            //
         }
         if (key === "d"){
+            if (angle >=360){
+                angle = 0
+            }
             angle += rotateSpeed
-            console.log(newAngle)
+            console.log(angle)
         }   
         if (key === "a"){
+            if (angle <= 0){
+                angle = 360+angle
+            }
             angle += rotateSpeed*-1
             console.log(angle)
         }
@@ -75,7 +99,14 @@ class Rocket extends Component{
         if (won === true){
             alert('You Landed')
             this.setState({
+                velX: .01,
+                velY: .01,
                 start: false,
+                speed: .01,
+                rotateSpeed: 1,
+                x: 5,
+                y: 5, 
+                angle: 0,
             })
           
         }
@@ -94,7 +125,14 @@ class Rocket extends Component{
         if (lost === true){
             alert('You Did not Make it')
             this.setState({
+                velX: .01,
+                velY: .01,
                 start: false,
+                speed: .01,
+                rotateSpeed: 1,
+                x: 5,
+                y: 5, 
+                angle: 0,
             })
             
         }

@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import spaceship from '../spaceship.svg';
+import React, { useEffect } from 'react';
+import spaceship from '../spaceship.png';
 const Ship = props => {
     function getWidth(){
         return '5%'
